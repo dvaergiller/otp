@@ -592,17 +592,11 @@ keysort(Col, Table) ->
     Sort = fun([A0|_], [B0|_]) ->
 		   A = try element(Col, A0) catch _:_ -> [] end,
 		   B = try element(Col, B0) catch _:_ -> [] end,
-		   case A == B of
-		       true -> A0 =< B0;
-		       false -> A < B
-		   end;
+		   A =< B;
 	      (A0, B0) when is_tuple(A0), is_tuple(B0) ->
 		   A = try element(Col, A0) catch _:_ -> [] end,
 		   B = try element(Col, B0) catch _:_ -> [] end,
-		   case A == B of
-		       true -> A0 =< B0;
-		       false -> A < B
-		   end
+		   A =< B
 	   end,
     lists:sort(Sort, Table).
 
